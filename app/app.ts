@@ -5,7 +5,7 @@ import Server from './server';
 import monitor from './monitor';
 import controllers from './controllers';
 
-// const url = 'https://s3.amazonaws.com/somebucket/tmp/hello.docx'; // testing shiftleft
+const url = 'https://s3.amazonaws.com/somebucket/tmp/hello.docx'; // testing analysis
 const serverOptions = {
   host: config.get('hapi.host'),
   port: config.get('hapi.port'),
