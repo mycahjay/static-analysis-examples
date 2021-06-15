@@ -1,0 +1,22 @@
+#!/bin/bash
+
+container_running=$( docker container inspect -f '{{.State.Running}}' $SONARQUBE_CONTAINER_NAME 2>/dev/null )
+
+if [[ "$container_running" == "true" ]]; then
+  sonar-scanner
+elif [[ "$container_running" == "false" ]]; then
+  echo -e "\nStarting Docker container...\n"
+  docker start $SONARQUBE_CONTAINER_NAME 1>/dev/null
+  read -p "Log in at localhost:8080 and press Enter to continue: "
+  sonar-scanner
+else
+  docker compose -f docker-compose.sonar.yml up -d
+  echo -e "\nDocker container \"$SONARQUBE_CONTAINER_NAME\" didnt exist, so was created."
+  echo -e "\nLog in at localhost:8080 (username: admin, password: admin)"
+  echo -e "and generate a token at localhost:8080/account/security.\n"
+  read -p "Paste token here to continue (^C to cancel): " token
+  echo "export SONARQUBE_TOKEN=$token" >> .env
+  export SONARQUBE_TOKEN=$token
+  echo -e "\nStarting analysis."
+  sonar-scanner
+fi

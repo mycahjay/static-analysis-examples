@@ -1,0 +1,7 @@
+version: "3"
+services:
+  sonarqube:
+    container_name: ${SONARQUBE_CONTAINER_NAME}
+    image: sonarqube:latest
+    ports:
+      - "8080:9000"

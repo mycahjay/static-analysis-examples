@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# [[ $(redis-cli ping 2>&1) == "PONG" ]] || brew services start redis
+
+set -e
+
+./bin/mocha $@

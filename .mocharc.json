@@ -1,0 +1,11 @@
+{
+  "require": [
+    "ts-node/register/transpile-only",
+    "../../../app/lib/require-patch.ts",
+    "../../../test/test-init.js"
+  ],
+  "timeout": 30000,
+  "reporter": "mocha-multi-reporters",
+  "reporter-options": "configFile=.mocha",
+  "recursive": true
+}
